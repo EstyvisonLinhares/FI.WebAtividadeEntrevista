@@ -1,4 +1,4 @@
-CREATE PROCEDURE FI_SP_IncBeneficiario
+CREATE PROCEDURE FI_SP_IncBenef
     @Nome VARCHAR (50),
     @CPF VARCHAR(14),
     @IdCliente INT

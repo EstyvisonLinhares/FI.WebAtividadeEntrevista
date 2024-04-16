@@ -25,7 +25,7 @@ namespace FI.AtividadeEntrevista.DAL
             parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", beneficiario.CPF));
             parametros.Add(new System.Data.SqlClient.SqlParameter("IdCliente", beneficiario.IdCliente));
 
-            DataSet ds = base.Consultar("FI_SP_IncBeneficiario", parametros);
+            DataSet ds = base.Consultar("FI_SP_IncBenef", parametros);
             long ret = 0;
             if (ds.Tables[0].Rows.Count > 0)
                 long.TryParse(ds.Tables[0].Rows[0][0].ToString(), out ret);
@@ -42,10 +42,9 @@ namespace FI.AtividadeEntrevista.DAL
 
             parametros.Add(new System.Data.SqlClient.SqlParameter("Nome", beneficiario.Nome));
             parametros.Add(new System.Data.SqlClient.SqlParameter("CPF", beneficiario.CPF));
-            parametros.Add(new System.Data.SqlClient.SqlParameter("IdCliente", beneficiario.IdCliente));
             parametros.Add(new System.Data.SqlClient.SqlParameter("ID", beneficiario.Id));
 
-            base.Executar("FI_SP_AltBeneficiario", parametros);
+            base.Executar("FI_SP_AltBenef", parametros);
         }
 
         internal void Excluir(long Id)
@@ -57,8 +56,30 @@ namespace FI.AtividadeEntrevista.DAL
             base.Executar("FI_SP_DelBeneficiario", parametros);
         }
 
+        internal List<Beneficiario> Pesquisa(int iniciarEm, int quantidade, string campoOrdenacao, bool crescente, out int qtd)
+        {
+            List<System.Data.SqlClient.SqlParameter> parametros = new List<System.Data.SqlClient.SqlParameter>();
+
+            parametros.Add(new System.Data.SqlClient.SqlParameter("iniciarEm", iniciarEm));
+            parametros.Add(new System.Data.SqlClient.SqlParameter("quantidade", quantidade));
+            parametros.Add(new System.Data.SqlClient.SqlParameter("campoOrdenacao", campoOrdenacao));
+            parametros.Add(new System.Data.SqlClient.SqlParameter("crescente", crescente));
+
+            DataSet ds = base.Consultar("FI_SP_PesqBenef", parametros);
+            List<DML.Beneficiario> cli = Converter(ds);
+
+            int iQtd = 0;
+
+            if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+                int.TryParse(ds.Tables[1].Rows[0][0].ToString(), out iQtd);
+
+            qtd = iQtd;
+
+            return cli;
+        }
+
         /// <summary>
-        /// Lista todos os clientes
+        /// Lista todos os beneficiarios
         /// </summary>
         internal List<DML.Beneficiario> Listar()
         {
@@ -66,7 +87,7 @@ namespace FI.AtividadeEntrevista.DAL
 
             parametros.Add(new System.Data.SqlClient.SqlParameter("Id", 0));
 
-            DataSet ds = base.Consultar("FI_SP_ConsBeneficiario", parametros);
+            DataSet ds = base.Consultar("FI_SP_ConsBenef", parametros);
             List<DML.Beneficiario> cli = Converter(ds);
 
             return cli;
@@ -90,6 +111,5 @@ namespace FI.AtividadeEntrevista.DAL
 
             return lista;
         }
-
     }
 }
