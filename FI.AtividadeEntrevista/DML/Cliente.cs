@@ -27,7 +27,7 @@ namespace FI.AtividadeEntrevista.DML
         public string Cidade { get; set; }
 
         /// <summary>
-        /// CEP
+        /// CPF
         /// </summary>
         public string CPF { get; set; }
 

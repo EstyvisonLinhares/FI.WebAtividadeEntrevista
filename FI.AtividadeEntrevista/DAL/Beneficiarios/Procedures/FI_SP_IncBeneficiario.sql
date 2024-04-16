@@ -1,0 +1,11 @@
+CREATE PROCEDURE FI_SP_IncBeneficiario
+    @Nome VARCHAR (50),
+    @CPF VARCHAR(14),
+    @IdCliente INT
+AS
+BEGIN
+    INSERT INTO BENEFICIARIOS(Nome, CPF, IdCliente)
+    VALUES (@Nome, @CPF, @IdCliente)
+
+    SELECT SCOPE_IDENTITY()
+END
