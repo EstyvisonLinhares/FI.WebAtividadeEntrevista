@@ -38,22 +38,37 @@ namespace WebAtividadeEntrevista.Controllers
             }
             else
             {
-                
-                model.Id = bo.Incluir(new Cliente()
-                {                    
-                    CEP = model.CEP,
-                    Cidade = model.Cidade,
-                    Email = model.Email,
-                    Estado = model.Estado,
-                    Logradouro = model.Logradouro,
-                    Nacionalidade = model.Nacionalidade,
-                    Nome = model.Nome,
-                    Sobrenome = model.Sobrenome,
-                    Telefone = model.Telefone
-                });
+                try
+                {
+                    model.Id = bo.Incluir(new Cliente()
+                    {                    
+                        CEP = model.CEP,
+                        Cidade = model.Cidade,
+                        CPF = model.CPF,
+                        Email = model.Email,
+                        Estado = model.Estado,
+                        Logradouro = model.Logradouro,
+                        Nacionalidade = model.Nacionalidade,
+                        Nome = model.Nome,
+                        Sobrenome = model.Sobrenome,
+                        Telefone = model.Telefone
+                    });
 
-           
-                return Json("Cadastro efetuado com sucesso");
+                    return Json("Cadastro efetuado com sucesso");
+                } 
+                catch (InvalidOperationException ex)
+                {
+                    if (ex.Message == "CPF já cadastrado.")
+                    {
+                        Response.StatusCode = 400;
+                        return Json("Erro: CPF já cadastrado.");
+                    }
+                    else
+                    {
+                        Response.StatusCode = 500;
+                        return Json("Erro ao processar o cadastro.");
+                    }
+                }
             }
         }
 
@@ -78,6 +93,7 @@ namespace WebAtividadeEntrevista.Controllers
                     Id = model.Id,
                     CEP = model.CEP,
                     Cidade = model.Cidade,
+                    CPF = model.CPF,
                     Email = model.Email,
                     Estado = model.Estado,
                     Logradouro = model.Logradouro,
@@ -105,6 +121,7 @@ namespace WebAtividadeEntrevista.Controllers
                     Id = cliente.Id,
                     CEP = cliente.CEP,
                     Cidade = cliente.Cidade,
+                    CPF = cliente.CPF,
                     Email = cliente.Email,
                     Estado = cliente.Estado,
                     Logradouro = cliente.Logradouro,
