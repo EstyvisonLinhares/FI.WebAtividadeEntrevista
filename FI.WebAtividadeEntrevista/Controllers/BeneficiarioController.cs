@@ -116,8 +116,8 @@ namespace WebAtividadeEntrevista.Controllers
 
         [HttpDelete]
         public JsonResult Excluir(int id)
-        { 
-            BoBeneficiario bo = new BoBeneficiario()
+        {
+            BoBeneficiario bo = new BoBeneficiario();
             bo.Excluir(id);
             return Json("Beneficiário excluído com sucesso");
         }

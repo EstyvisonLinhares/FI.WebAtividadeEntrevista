@@ -28,7 +28,7 @@
             success:
                 function (r) {
                     ModalDialog("Sucesso!", r)
-                    $("#formCadastro")[0].reset();
+                    $("#formCadastroBeneficiario")[0].reset();
                 }
         });
     })

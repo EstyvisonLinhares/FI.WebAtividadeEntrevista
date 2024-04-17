@@ -193,6 +193,9 @@
     <Compile Include="Models\BeneficiarioModel.cs" />
     <Compile Include="Models\ClienteModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\Beneficiarios\FI.AlterarBeneficiarios.js" />
+    <Content Include="Scripts\Beneficiarios\FI.ExcluirBeneficiarios.js" />
+    <Content Include="Scripts\Beneficiarios\FI.ListBeneficiarios.js" />
     <Content Include="Scripts\Beneficiarios\FI.Beneficiarios.js" />
   </ItemGroup>
   <ItemGroup>
