@@ -130,8 +130,6 @@ namespace WebAtividadeEntrevista.Controllers
                     Sobrenome = cliente.Sobrenome,
                     Telefone = cliente.Telefone
                 };
-
-            
             }
 
             return View(model);

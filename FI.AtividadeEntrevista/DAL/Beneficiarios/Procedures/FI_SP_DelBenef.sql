@@ -1,0 +1,6 @@
+CREATE PROCEDURE FI_SP_DelBenef
+    @IdBeneficiario INT
+AS
+BEGIN
+    DELETE FROM BENEFICIARIOS WHERE ID = @IdBeneficiario;
+END

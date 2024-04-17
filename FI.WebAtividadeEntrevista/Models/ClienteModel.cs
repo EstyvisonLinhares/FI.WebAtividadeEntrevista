@@ -26,7 +26,7 @@ namespace WebAtividadeEntrevista.Models
         public string Cidade { get; set; }
 
         /// <summary>
-        /// CEP
+        /// CPF
         /// </summary>
         [Required]
         public string CPF { get; set; }

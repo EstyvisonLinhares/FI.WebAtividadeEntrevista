@@ -39,8 +39,25 @@ $(document).ready(function () {
             }
         });
     })
+
+    $('#beneficiarios').click(function () {
+        openPopup();
+    });
     
 })
+
+function openPopup() {
+    $.ajax({
+        url: '/Beneficiario/GetBeneficiariosPopup',
+        method: 'GET',
+        success: function (data) {
+            ModalDialog("Beneficiários", data);
+        },
+        error: function () {
+            ModalDialog("Erro", "Não foi possível carregar o popup de beneficiários.");
+        }
+    });
+}
 
 function validaCPF(cpf) {
     cpf = cpf.replace(/[^\d]+/g, '');
